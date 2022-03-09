@@ -38,11 +38,12 @@ stages:
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+        buildContext: $(Build.SourcesDirectory)/Shopping
         tags: |
           $(tag)
 
-    - upload: manifests
-      artifact: manifests
+    - upload: aks
+      artifact: aks
 
 - stage: Deploy
   displayName: Deploy stage
@@ -70,8 +71,7 @@ stages:
             inputs:
               action: deploy
               manifests: |
-                $(Pipeline.Workspace)/manifests/deployment.yml
-                $(Pipeline.Workspace)/manifests/service.yml
+                $(Pipeline.Workspace)/manifests/shoppingapi.yml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
