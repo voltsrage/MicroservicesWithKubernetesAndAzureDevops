@@ -42,8 +42,8 @@ stages:
         tags: |
           $(tag)
 
-    - upload: aks
-      artifact: aks
+    - upload: manifest
+      artifact: manifest
 
 - stage: Deploy
   displayName: Deploy stage
